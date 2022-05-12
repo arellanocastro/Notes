@@ -1,0 +1,61 @@
+#ADD EMPTY COLUMN
+df["column_name"] = np.nan
+
+
+#CONVERT TO LOWER CASE
+df['column'] = df['column'].str.lower()
+
+
+#COUNT ELEMENTS IN COLUMN
+df['column'].value_counts()
+
+
+#DATE/TIME
+today = datetime.today().strftime('%Y-%m-%d')
+
+
+#DROP ROWS W/ CONDITIONS
+to_remove = df[df['column_name'] == 'element' ].index
+df.drop(to_remove , inplace=True)
+
+
+#MERGE DATAFRAMES W/ CONCAT
+df = pd.concat([df_1, df_2], ignore_index=True) 
+
+
+#MERGE DATAFRAMES W/ MERGE
+new_df = df_1.merge(df_2, how='left', left_on="column_1", right_on="column_2")
+
+
+#READ FILES
+df = pd.read_excel(f"results/file_name.xlsx")
+df = pd.read_csv(f"results/file_name.csv", sep=",", encoding='latin1')
+
+
+#REMOVE LAST ROW
+df = df.iloc[: , :-1]
+
+
+#RENAME COLUMNS
+df = df.rename(columns={"original_name": "new_name"})
+
+
+#REPLACE W/ WHERE (AFFECTS ALL ROWS)
+df["new_column"] = np.where(df["column_1"]==df["column_2"], "if_true", "if_false")
+
+
+#REPLACE W/ FOR (AFFECTS SPECIFIC ROWS)
+for index in df.index:
+    if df.loc[index,'column_name_1']==0:
+        df.loc[index,'column_name_1'] = np.nan
+        df.loc[index,'column_name_2'] = "str"
+        df.loc[index,'column_name_1'] = int
+
+
+#REPLACE EXACT STR/INT
+df["column_name"] = df["column_name"].replace(element_to_replace, element_to_add)
+
+
+#SELECT SPECIFIC ROWS
+df = df.iloc[200:400]
+
