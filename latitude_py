@@ -14,6 +14,10 @@ df['column'].value_counts()
 today = datetime.today().strftime('%Y-%m-%d')
 
 
+#DELETE COLUMN
+del second["column_name"]
+
+
 #DROP ROWS W/ CONDITIONS
 to_remove = df[df['column_name'] == 'element' ].index
 df.drop(to_remove , inplace=True)
@@ -56,6 +60,9 @@ for index in df.index:
 df["column_name"] = df["column_name"].replace(element_to_replace, element_to_add)
 
 
-#SELECT SPECIFIC ROWS
+#SELECT ROWS BY INDEX
 df = df.iloc[200:400]
+
+#SELECT ROWS w/ CONDITIONS
+filterinfDataframe = df[(df['column'] > 30) & (df['column'] < 33) ]
 
