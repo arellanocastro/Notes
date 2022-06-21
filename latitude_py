@@ -31,6 +31,11 @@ df = pd.concat([df_1, df_2], ignore_index=True)
 new_df = df_1.merge(df_2, how='left', left_on="column_1", right_on="column_2")
 
 
+# MERGE DICTIONARIES
+dictionary = dict1 | dict2
+
+
+
 #READ FILES
 df = pd.read_excel(f"results/file_name.xlsx")
 df = pd.read_csv(f"results/file_name.csv", sep=",", encoding='latin1')
@@ -65,4 +70,9 @@ df = df.iloc[200:400]
 
 #SELECT ROWS w/ CONDITIONS
 filterinfDataframe = df[(df['column'] > 30) & (df['column'] < 33) ]
+
+
+# TRANSFORM DATAFRAME TO DICTIONARY
+dictionary = dict(zip(df.col_1, df.col_2))
+
 
