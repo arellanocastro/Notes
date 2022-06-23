@@ -10,6 +10,10 @@ df['column'] = df['column'].str.lower()
 df['column'].value_counts()
 
 
+#COUNT ELEMENTS IN COLUMNS W/ CONDITION
+len(df.groupby('col_1').apply(lambda g: pd.Series(g['col_2'].unique())))
+
+
 #DATE/TIME
 today = datetime.today().strftime('%Y-%m-%d')
 
