@@ -76,6 +76,10 @@ df = df.iloc[200:400]
 filterinfDataframe = df[(df['column'] > 30) & (df['column'] < 33) ]
 
 
+#SORT ROWS
+df.sort_values(by='col1', ascending=False)
+
+
 # TRANSFORM DATAFRAME TO DICTIONARY
 dictionary = dict(zip(df.col_1, df.col_2))
 
