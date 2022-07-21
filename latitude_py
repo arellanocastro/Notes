@@ -63,6 +63,14 @@ for index in df.index:
         df.loc[index,'column_name_1'] = np.nan
         df.loc[index,'column_name_2'] = "str"
         df.loc[index,'column_name_1'] = int
+        
+        
+#REPLACE AS LOOP (runs every element of the list)
+list = [element1, element2]
+str = "any string with {}"
+
+for element in list:
+    x = str.format(list)
 
 
 #REPLACE EXACT STR/INT
