@@ -18,6 +18,11 @@ r'\1 \3 \4 \5'
 [a-zA-Z]+
 ```
 
+##### MATCH ANY TEXT, ACCENTED LETTERS(À-ú), NUMBERS(0-9) AND SPACES(\s) TOGETHER
+```
+[A-zÀ-ú0-9\s]+
+```
+
 ##### Match special digits (. , * ? / )
 Note: The \ is used to cancel the regular meaning of a letter, symbol or special digit
 ```
