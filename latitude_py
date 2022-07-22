@@ -77,6 +77,11 @@ for element in list:
 df["column_name"] = df["column_name"].replace(element_to_replace, element_to_add)
 
 
+#REMOVE LEADING SPACE IN STRING COLUMN
+for index in df.index:
+    df.loc[index, 'col'] = df.loc[index, 'col'].lstrip(' ')
+
+
 #SELECT ROWS BY INDEX
 df = df.iloc[200:400]
 
