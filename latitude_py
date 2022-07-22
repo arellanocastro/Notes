@@ -53,6 +53,15 @@ df = df.iloc[: , :-1]
 df = df.rename(columns={"original_name": "new_name"})
 
 
+#REPLACE W/ DICTIONARY
+dictionary = {'é|è':'e',
+             'ï':'i',
+              'ô':'o'}
+
+df['col'] = df["col"].replace(dictionary, regex=True)
+
+
+
 #REPLACE W/ WHERE (AFFECTS ALL ROWS)
 df["new_column"] = np.where(df["column_1"]==df["column_2"], "if_true", "if_false")
 
