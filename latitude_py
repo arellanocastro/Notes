@@ -110,3 +110,45 @@ df.sort_values(by='col1', ascending=False)
 dictionary = dict(zip(df.col_1, df.col_2))
 
 
+
+
+COMPLEX FUNCTIONS:
+
+def separate_mapped(df):
+    mapped_df = df[df['concept_id']!=0].copy()
+    mapped_list = mapped_df['label'].tolist()
+    remaining_df = df[~df['label'].isin(mapped_list)]
+    remaining_df = remaining_df.drop(['col_1', 'col_2'], axis=1)
+    mapped_df = mapped_df.drop_duplicates(subset=['col_1', 'col_2'], keep="last")
+    return mapped_df, remaining_df
+
+def find_duplicates(df):
+    no_dups_df = df.drop_duplicates(subset=["source_value", 'source_concept_code', 'country'], keep=False)
+    no_dups_list = no_dups_df['source_value'].tolist()
+    duplicate_list = df[~df['source_value'].isin(no_dups_list)]
+    duplicate_list = duplicate_list['source_value'].to_list()
+    df['multiple_map'] = df['source_value'].isin(duplicate_list)
+    for index in df.index:
+        if df.loc[index,'multiple_map']==True:
+            df.loc[index,'multiple_map'] = 1
+            df.loc[index,'is_reviewed'] = 1
+        else:
+            df.loc[index, 'multiple_map'] = 0
+            df.loc[index,'is_reviewed'] = 0        
+    return df
+
+def final_format(df):
+  df['concept_id'] = df['concept_id'].fillna(0)  
+  integers = ['source_concept_code', 'concept_id']
+  strings = ['domain_id', 'concept_name']
+  displays = ['map_type', 'vocabulary_id', 'domain_id', 'standard_concept', 'multiple_map', 'mapping_date']
+  for element in integers:
+      df[element] = df[element].astype(int)
+  for element in strings:
+      df[element] = df[element].str.lower()
+  for element in displays:
+      print(element.upper(), ':')
+      print(df[element].value_counts(), sep=';', end='\n')
+      print(' ')
+  df = df.sort_values(by=['country','source_concept_code'])
+  return df
