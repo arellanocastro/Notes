@@ -49,6 +49,19 @@ df = pd.read_excel(f"results/file_name.xlsx")
 df = pd.read_csv(f"results/file_name.csv", sep=",", encoding='latin1')
 
 
+#READ MULTIPLE FILES
+empty_list = []
+for j in range(1,16):
+    file = "../../results/norvodisk/dirty_data/raw_{}.csv".format(j)
+    empty_list.append(file)
+
+empty_df = pd.DataFrame()
+for name in empty_list:
+    file = pd.read_csv(name, encoding='utf-8')
+    empty_df = pd.concat([empty_df, file])
+empty_df = empty_df.reset_index(drop=True)
+
+
 #REMOVE LAST ROW
 df = df.iloc[: , :-1]
 
