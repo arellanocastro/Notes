@@ -35,6 +35,11 @@ df.drop(to_remove , inplace=True)
 df[['new_col1','new_col2']]=df.col.str.split('-',expand=True)
 
 
+#EXPAND COLUMN OF DICTIONARIES
+df = pd.concat([df.drop(['dict_col'], axis=1), df['dict_col'].apply(pd.Series)], axis=1)
+
+
+
 #MERGE DATAFRAMES W/ CONCAT
 df = pd.concat([df_1, df_2], ignore_index=True) 
 
