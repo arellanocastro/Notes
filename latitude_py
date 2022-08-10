@@ -22,6 +22,10 @@ today = datetime.today().strftime('%Y-%m-%d')
 del second["column_name"]
 
 
+#DISPLAY ATTRIBUTES OF OBJECT
+vars(object)
+
+
 #DROP ROWS W/ CONDITIONS
 to_remove = df[df['column_name'] == 'element' ].index
 df.drop(to_remove , inplace=True)
