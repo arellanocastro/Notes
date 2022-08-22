@@ -1,6 +1,9 @@
 #ADD EMPTY COLUMN
 df["column_name"] = np.nan
 
+#CHECK IF DATAFRAME IS EMPTY
+df.empty (this is a boolean, TRUE/FALSE)
+
 
 #COMBINE MULTIPLE COLUMNS INTO ONE
 df['col3'] = df[['col1', 'col2', colx]].agg(' '.join, axis=1)
