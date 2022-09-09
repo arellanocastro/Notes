@@ -146,6 +146,8 @@ df.sort_values(by='col1', ascending=False)
 dictionary = dict(zip(df.col_1, df.col_2))
 
 
+#TRANSFORM COLUMN TO DATETIME
+df['col'] = pd.to_datetime(df['col'])
 
 
 COMPLEX FUNCTIONS:
