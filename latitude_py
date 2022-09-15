@@ -33,6 +33,10 @@ del second["column_name"]
 vars(object)
 
 
+#DROP COLUMNS
+df.drop(['B', 'C'], axis=1)
+
+
 #DROP ROWS W/ CONDITIONS
 to_remove = df[df['column_name'] == 'element' ].index
 df.drop(to_remove , inplace=True)
