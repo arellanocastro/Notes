@@ -54,6 +54,9 @@ df = pd.concat([df.drop(['dict_col'], axis=1), df['dict_col'].apply(pd.Series)],
 variable_name = dict.get('key_1', {}).get('key_2')  
 
 
+#JOIN LIST ELEMENTS INTO A SINGLE STRING
+x = ' '.join(str(e) for e in list)
+
 #MERGE DATAFRAMES W/ CONCAT
 df = pd.concat([df_1, df_2], ignore_index=True) 
 
@@ -140,6 +143,10 @@ df = df.iloc[200:400]
 
 #SELECT ROWS w/ CONDITIONS
 filterinfDataframe = df[(df['column'] > 30) & (df['column'] < 33) ]
+
+
+#SLEEP
+time.sleep(1)
 
 
 #SORT ROWS
