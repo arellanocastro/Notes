@@ -25,6 +25,12 @@ len(df.groupby('col_1').apply(lambda g: pd.Series(g['col_2'].unique())))
 today = datetime.today().strftime('%Y-%m-%d')
 
 
+#DOWNLOAD REQUESTS AS FILES
+t = requests.get(url)
+open("file_name.csv", "wb").write(t.content)
+t = pd.read_csv("file_name.csv", sep=';')
+
+
 #DELETE COLUMN
 del second["column_name"]
 
