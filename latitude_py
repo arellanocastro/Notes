@@ -167,6 +167,15 @@ dictionary = dict(zip(df.col_1, df.col_2))
 df['col'] = pd.to_datetime(df['col'])
 
 
+#UNZIP FILES - Extract all the contents of zip file in current directory
+from zipfile import ZipFile
+t = requests.get(url)
+open("file_name.zip", "wb").write(t.content)
+with ZipFile('file_name.zip', 'r') as zipObj:
+   zipObj.extractall()
+
+
+
 COMPLEX FUNCTIONS:
 
 def separate_mapped(df):
