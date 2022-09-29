@@ -1,0 +1,71 @@
+import openai
+import time
+import json
+openai.api_key = "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"
+
+name_list = pubmed.full_name.unique().tolist()
+display(len(name_list))
+processed_df = pd.read_csv('data/in-progress/affiliations_by_openai.csv')
+#processed_df = processed_df[processed_df['full_name']!='a_arjona-sánchez']
+for name in name_list:
+    if name in processed_df.full_name.unique().tolist():
+        name_list.remove(name)
+display(len(name_list))
+
+af = pd.DataFrame()
+for n in n_list:
+    print('Currently processing: '+ n)
+    filter_df = pubmed[pubmed['full_name'] == n].reset_index(drop=True)
+    filter_df = filter_df.drop_duplicates(subset='affiliation', keep='first')
+    display(len(filter_df))
+    temp_df = pd.DataFrame() 
+    if len(filter_df) > 36:
+        range_a, range_b = create_ranges(len(filter_df))
+        for i in range(len(range_a)):
+            batch = filter_df[range_a[i]:range_b[i]].reset_index(drop=True)
+            for index in batch.index:
+                batch.loc[index, 'openai_affiliations'] = open_query(batch.loc[index, 'affiliation'])
+                display(batch['openai_affiliations'].isna().sum())
+                time.sleep(0.7)
+            temp_df = pd.concat([temp_df, batch], ignore_index=True)
+            
+    else:
+        for index in filter_df.index:
+            filter_df.loc[index, 'openai_affiliations'] = open_query(filter_df.loc[index, 'affiliation'])
+            display(filter_df['openai_affiliations'].isna().sum())
+            temp_df = pd.concat([temp_df, filter_df], ignore_index=True)
+            #time.sleep(2)
+    print('You can pause now!')
+    time.sleep(2)
+    af = pd.concat([af, temp_df, processed_df], ignore_index=True)
+    af = af.drop_duplicates(subset=['full_name', 'openai_affiliations'], keep='first')
+    af.to_csv('data/in-progress/affiliations_by_openai.csv', index=False)
+
+
+
+# FUNCTIONS
+def min_range(n):
+    lower = []
+    x = range(0, n, 37)
+    for r in x:
+        lower.append(r)
+    return lower
+
+def max_range(n):
+    upper = []
+    x = range(0, n, 37)
+    for r in x:
+        upper.append(r)
+    upper.append(n)
+    del upper[0]
+    return upper
+
+def create_ranges(n):
+    max_rnk = max_range(n)
+    min_rnk = min_range(n)
+    return min_rnk, max_rnk
+    
+    
+    
+    
+    
