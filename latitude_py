@@ -60,6 +60,10 @@ df = pd.concat([df.drop(['dict_col'], axis=1), df['dict_col'].apply(pd.Series)],
 variable_name = dict.get('key_1', {}).get('key_2')  
 
 
+#GET PERCENTAGES
+df['col'].value_counts(normalize=True)
+
+
 #JOIN LIST ELEMENTS INTO A SINGLE STRING
 x = ' '.join(str(e) for e in list)
 
