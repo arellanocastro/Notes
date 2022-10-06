@@ -139,6 +139,10 @@ for element in list:
 df["column_name"] = df["column_name"].replace(element_to_replace, element_to_add)
 
 
+# REMOVE ALL nan IN A DATAFRAME
+df[col.isna().any(axis=1)]
+
+
 #REMOVE LEADING SPACE IN STRING COLUMN
 for index in df.index:
     df.loc[index, 'col'] = df.loc[index, 'col'].lstrip(' ')
