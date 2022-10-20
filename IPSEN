@@ -1,0 +1,2 @@
+### CUSTOMIZE DISPLAY (PANDAS)
+pd.set_option('display.max_rows', 500)
