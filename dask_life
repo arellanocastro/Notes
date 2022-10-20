@@ -1,2 +1,5 @@
 ### CUSTOMIZE DISPLAY (PANDAS)
 pd.set_option('display.max_rows', 500)
+
+## TRANSFORM DASK DATAFRAME INTO PANDAS
+df.compute()
