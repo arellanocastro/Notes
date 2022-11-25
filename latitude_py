@@ -21,6 +21,18 @@ df['column'].value_counts()
 len(df.groupby('col_1').apply(lambda g: pd.Series(g['col_2'].unique())))
 
 
+#CREATE DICTIONARY WITH LOOP
+keys = list(df.col.value_counts().keys())
+values = []
+for key in keys:
+    dft = df[df.col == key].copy()
+    value = df.col.mean()
+    values.append(value)
+dicts = {}    
+for i in range(len(keys)):
+    dicts[keys[i]] = values[i]
+
+
 #DATE/TIME
 today = datetime.today().strftime('%Y-%m-%d')
 
