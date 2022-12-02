@@ -118,12 +118,26 @@ df = df.iloc[: , :-1]
 df = df.rename(columns={"original_name": "new_name"})
 
 
-#REPLACE W/ DICTIONARY
+#REPLACE W/ DICTIONARY (dataframes)
 dictionary = {'é|è':'e',
              'ï':'i',
               'ô':'o'}
 
 df['col'] = df["col"].replace(dictionary, regex=True)
+
+
+#REPLACE W/ DICTIONARY (single strings)
+days_week = {'0': 'Dimanche :',
+            '1': 'Lundi :',
+            '2': 'Mardi :',
+            '3': 'Mercredi :',
+            '4': 'Jeudi :',
+            '5': 'Vendredi :',
+            '6': 'Samedi :'}
+
+x = '1 0900 1900 '
+for number, name in days_week.items():
+    x = x.replace(number, name, 1)
 
 
 
