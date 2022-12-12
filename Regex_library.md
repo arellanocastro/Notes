@@ -1,3 +1,8 @@
+### WORD BOUNDARY
+```
+\bword\b
+```
+
 #### SUBSTITUTIONS
 ```
 re.sub(r'(random)(pattern)', r'\desired outcome', str_to_analyse)
