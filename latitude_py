@@ -254,3 +254,60 @@ def final_format(df):
       print(' ')
   df = df.sort_values(by=['country','source_concept_code'])
   return df
+
+#BK-TREESSSSS
+class BKNode:
+    def __init__(self, name):
+        self.name = name
+        self.children = {}
+
+    def add_child(self, child):
+        distance = Levenshtein.distance(self.name, child.name)
+        if distance in self.children:
+            self.children[distance].add_child(child)
+        else:
+            self.children[distance] = child
+
+
+class BKTree:
+    def __init__(self):
+        self.root = None
+
+    def add(self, name):
+        if self.root is None:
+            self.root = BKNode(name)
+        else:
+            node = self.root
+            while node:
+                distance = Levenshtein.distance(node.name, name)
+                if distance == 0:
+                    break
+                if distance in node.children:
+                    node = node.children[distance]
+                else:
+                    node.add_child(BKNode(name))
+                    break
+
+    def search(self, query, threshold):
+        def search_node(node, query, threshold):
+            distance = Levenshtein.distance(node.name, query)
+            if distance <= threshold:
+                matches.append(node.name)
+            start = max(0, distance - threshold)
+            end = distance + threshold
+            for d in range(start, end + 1):
+                if d in node.children:
+                    search_node(node.children[d], query, threshold)
+
+        matches = []
+        if self.root:
+            search_node(self.root, query, threshold)
+        return matches
+
+
+def generate_bktree(any_list):
+    tree = BKTree()
+    # Add names to the tree
+    for name in any_list:
+        tree.add(name)
+    return tree
